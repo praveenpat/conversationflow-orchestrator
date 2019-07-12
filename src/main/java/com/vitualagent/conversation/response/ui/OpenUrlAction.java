@@ -7,7 +7,7 @@ public class OpenUrlAction  extends Action{
 		
 	}
 	
-	//used only with action openUrl
+	  //used only with action openUrl
 		private String url;
 
 		public String getUrl() {

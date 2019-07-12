@@ -5,15 +5,50 @@ import java.util.Map;
 
 public class UserRequest {
 	
-	String queryText;
+	
+	private String sessionId;
+	
+	private String userQuery;
+	
+	private String languageCode;
+	
 	
 	Map<String,Object> parameters;
 	
 	Map<String,String> channelAttributes;
 	
-	String conversationId;
 	
 	String actionName;
+	
+	
+	
+	
+	
+	
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+
+	public String getUserQuery() {
+		return userQuery;
+	}
+
+	public void setUserQuery(String userQuery) {
+		this.userQuery = userQuery;
+	}
+
+	public String getLanguageCode() {
+		return languageCode;
+	}
+
+	public void setLanguageCode(String languageCode) {
+		this.languageCode = languageCode;
+	}
 
 	public Map<String, String> getChannelAttributes() {
 		return channelAttributes;
@@ -23,13 +58,7 @@ public class UserRequest {
 		this.channelAttributes = channelAttributes;
 	}
 
-	public String getConversationId() {
-		return conversationId;
-	}
-
-	public void setConversationId(String conversationId) {
-		this.conversationId = conversationId;
-	}
+	
 
 	public String getActionName() {
 		return actionName;
@@ -47,12 +76,6 @@ public class UserRequest {
 		this.parameters = parameters;
 	}
 
-	public String getQueryText() {
-		return queryText;
-	}
-
-	public void setQueryText(String queryText) {
-		this.queryText = queryText;
-	}
+	
 
 }

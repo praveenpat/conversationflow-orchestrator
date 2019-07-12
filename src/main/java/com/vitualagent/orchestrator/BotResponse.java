@@ -1,44 +1,228 @@
 package com.vitualagent.orchestrator;
 
-import com.vitualagent.conversation.response.ui.Action;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.springframework.util.CollectionUtils;
+
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BotResponse {
 	
+	private String sessionId;
+	
+	private String userQuery;
+	
+	private String fullfillmentText;
+	
+	private Map<String,Object> entities;
+	
+	private String actionName;
+	
+	private String intentName;
+	
+	private List<Map<String,Object>> customPayloads;
+	
 
-	String fulfillmentText;
+	private List<KnowledgeAnswers> knowledgeAnswers;
 	
-	Action[] actions;
+	private Number sentimentScore;
 	
+	private boolean endInteraction;
+	
+	private boolean apiTimeoutFallback;
+	
+	
+	
+	
+	public boolean isApiTimeoutFallback() {
+		return apiTimeoutFallback;
+	}
+
+
+
+	public void setApiTimeoutFallback(boolean apiTimeoutFallback) {
+		this.apiTimeoutFallback = apiTimeoutFallback;
+	}
+
+
+
+	public boolean isEndInteraction() {
+		return endInteraction;
+	}
+
+
+
+	public void setEndInteraction(boolean endInteraction) {
+		this.endInteraction = endInteraction;
+	}
+
+
+
+	public void setCustomPayloads(List<Map<String, Object>> customPayloads) {
+		this.customPayloads = customPayloads;
+	}
+
+
+
+	public String getUserQuery() {
+		return userQuery;
+	}
+
+
+
+	public void setUserQuery(String userQuery) {
+		this.userQuery = userQuery;
+	}
+
+
+
+	public Number getSentimentScore() {
+		return sentimentScore;
+	}
+
+
+
+	public void setSentimentScore(Number sentimentScore) {
+		this.sentimentScore = sentimentScore;
+	}
+
+
+
+	public List<Map<String, Object>> getCustomPayloads() {
+		return customPayloads;
+	}
+
+
+
+	public void setCustomPayload(List<Map<String, Object>> customPayload) {
+		this.customPayloads = customPayload;
+	}
+	
+	
+	
+	public void addPayloadData(Map<String,Object> payLoad) {
+		
+		if (this.customPayloads==null) {
+			
+			this.customPayloads=new ArrayList<Map<String,Object>>();
+		}
+		
+		this.customPayloads.add(payLoad);
+	}
+	
+	
+	
+	
+
+
+	public List<KnowledgeAnswers> getKnowledgeAnswers() {
+		return knowledgeAnswers;
+	}
+
+
+
+	public void setKnowledgeAnswers(List<KnowledgeAnswers> knowledgeAnswers) {
+		this.knowledgeAnswers = knowledgeAnswers;
+	}
+
+	
+	public void addKnowledgeAnswers(String question,String answer,Number confidenceScore) {
+		
+		if(CollectionUtils.isEmpty(this.knowledgeAnswers)) {
+		    this.knowledgeAnswers = new ArrayList<KnowledgeAnswers>();
+		}
+		
+		this.knowledgeAnswers.add(new KnowledgeAnswers(question,answer,confidenceScore));
+	}
+
+
+	public String getIntentName() {
+		return intentName;
+	}
+
+
+
+	public void setIntentName(String intentName) {
+		this.intentName = intentName;
+	}
+
+
+	
+
+
+	
+
+
+
+	public Map<String, Object> getEntities() {
+		return entities;
+	}
+
+
+
+	public void setEntities(Map<String, Object> entities) {
+		this.entities = entities;
+	}
+	
+	public void addEntity(String name,String value) {
+		
+		if(CollectionUtils.isEmpty(entities)) {
+			entities=new HashMap<>();
+		}
+		
+		entities.put(name, value);
+		
+	}
+
+
+
+	public String getActionName() {
+		return actionName;
+	}
+
+
+
+	public void setActionName(String actionName) {
+		this.actionName = actionName;
+	}
+
+
 
 	public BotResponse() {
 		super();
 		
 	}
-
-	public Action[] getActions() {
-		return actions;
-	}
-
-
-	public void setActions(Action[] actions) {
-		this.actions = actions;
-	}
-
-
 	
-
-	public BotResponse(String fulfillmentText) {
+	
+	
+	public BotResponse(String sessionId, String fullfillmentText) {
 		super();
-		this.fulfillmentText = fulfillmentText;
+		this.sessionId = sessionId;
+		this.fullfillmentText = fullfillmentText;
 	}
 
-	public String getFulfillmentText() {
-		return fulfillmentText;
-	}
 
-	public void setFulfillmentText(String fulfillmentText) {
-		this.fulfillmentText = fulfillmentText;
+
+	public String getSessionId() {
+		return sessionId;
 	}
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+	public String getFullfillmentText() {
+		return fullfillmentText;
+	}
+	public void setFullfillmentText(String fullfillmentText) {
+		this.fullfillmentText = fullfillmentText;
+	}
+	
 	
 
 }

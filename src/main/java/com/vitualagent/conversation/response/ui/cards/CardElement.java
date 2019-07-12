@@ -1,5 +1,8 @@
 package com.vitualagent.conversation.response.ui.cards;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CardElement {
 	
 	private String type;
